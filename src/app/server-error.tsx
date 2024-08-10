@@ -3,15 +3,14 @@ import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { Image } from "expo-image";
 
 //custom imports
-import IMAGES from "@/src/constants/images";
-import { CONSTANTS } from "@/src/constants/constants";
+import { CONSTANTS } from "@src/lib/helpers";
 
 export default function ServerErrorScreen() {
   return (
     <View style={styles.container}>
       <Stack.Screen options={{ title: "Oops!" }} />
       <Image
-        source={IMAGES.error500}
+        source={require("@/assets/images/error500.png")}
         style={styles.image}
         contentFit="contain"
       />
@@ -40,7 +39,7 @@ const styles = StyleSheet.create({
     paddingVertical: 15,
   },
   image: {
-    width: CONSTANTS.windowWidth - 80,
+    width: CONSTANTS.deviceWidth - 80,
     height: 320,
   },
 

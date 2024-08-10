@@ -1,5 +1,7 @@
 import { Dimensions, Platform, StatusBar, StyleSheet } from "react-native";
 
+const { width: deviceWidth, height: deviceHeight } = Dimensions.get("window");
+
 export const CONSTANTS = {
   spacingLXX: 32,
   spacingLX: 24,
@@ -10,12 +12,18 @@ export const CONSTANTS = {
   spacingSX: 4,
   spacingSXX: 2,
   statusBarHeight: Platform.OS === "ios" ? 20 : StatusBar.currentHeight,
-  windowWidth: Dimensions.get("window").width,
-  windowHeight: Dimensions.get("window").height,
+  deviceWidth,
+  deviceHeight,
   borderRadius: 8,
   borderWidth: StyleSheet.hairlineWidth,
 };
 
+export const blurhash ="LCI}-S^wEMNF58t7x[t8.m?bnOaf";
 
-export const blurhash =
-  '|rF?hV%2WCj[ayj[a|j[az_NaeWBj@ayfRayfQfQM{M|azj[azf6fQfQfQIpWXofj[ayj[j[fQayWCoeoeaya}j[ayfQa{oLj?j[WVj[ayayj[fQoff7azayj[ayj[j[ayofayayayj[fQj[ayayj[ayfjj[j[ayjuayj[';
+export function widthPercentage(p: number): number {
+  return (deviceWidth * p) / 100;
+}
+
+export function heightPercentage(p: number): number {
+  return (deviceHeight * p) / 100;
+}

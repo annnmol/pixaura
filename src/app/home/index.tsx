@@ -7,18 +7,19 @@ import { useQuery } from "@tanstack/react-query";
 import { ThemedText, ThemedView } from "@/src/components/themed";
 import { ImagesNetworkService } from "@/src/services/images-network-service";
 import { textStyles } from "@/src/components/themed/text";
+import data from "@/assets/dummy/data.json";
 
 const HomeScreen = () => {
-  const { data, isLoading, error, refetch } = useQuery({
-    queryKey: ["images", "search"],
-    queryFn: async () => await ImagesNetworkService.searchImages(),
-  });
+  // const { data, isLoading, error, refetch } = useQuery({
+  //   queryKey: ["images", "search"],
+  //   queryFn: async () => await ImagesNetworkService.searchImages(),
+  // });
 
   console.log(
     `🚀 ~ file: index.tsx:25 ~ Index ~ data:`,
     // data,
-    isLoading,
-    error,
+    // isLoading,
+    // error,
     JSON.stringify(data, null, 2)
   );
   return (

@@ -21,7 +21,7 @@ const green= '#4FEE57';
 const red = '#EF0827';
 const yellow='#FCC70B';
 
-export const Colors = {
+export const colors = {
   light: {
     text: '#11181C',
     background: '#fff',
