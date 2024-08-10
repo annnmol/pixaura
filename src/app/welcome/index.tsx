@@ -15,6 +15,14 @@ import {
   widthPercentage,
 } from "@/src/lib/helpers";
 
+
+const GRADIENT_COLORS = [
+  "rgba(255,255,255,0)",
+  "rgba(255,255,255,0.5)",
+  "rgba(255,255,255,0.8)",
+  "rgba(255,255,255,1)",
+];
+
 const WelcomeScreen = () => {
   const router = useRouter();
 
@@ -33,12 +41,7 @@ const WelcomeScreen = () => {
         style={styles.container}
       >
         <LinearGradient
-          colors={[
-            "rgba(255,255,255,0)",
-            "rgba(255,255,255,0.5)",
-            "rgba(255,255,255,0.8)",
-            "rgba(255,255,255,1)",
-          ]}
+          colors={GRADIENT_COLORS}
           start={[0.5, 0]}
           end={[0.5, 0.8]}
           style={styles.gradient}
