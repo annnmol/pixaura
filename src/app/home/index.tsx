@@ -5,24 +5,30 @@ import { StyleSheet } from "react-native";
 //custom imports
 import { useQuery } from "@tanstack/react-query";
 import { ThemedText, ThemedView } from "@/src/components/themed";
-import { DummyNetworkService } from "@/src/services/dummy-network-service";
+import { ImagesNetworkService } from "@/src/services/images-network-service";
+import { textStyles } from "@/src/components/themed/text";
 
 const HomeScreen = () => {
   const { data, isLoading, error, refetch } = useQuery({
-    queryKey: ["flights", "all"],
-    queryFn: async () =>
-      await DummyNetworkService.getAllFlights(),
+    queryKey: ["images", "search"],
+    queryFn: async () => await ImagesNetworkService.searchImages(),
   });
 
-  console.log(`🚀 ~ file: home.tsx:18 ~ HomeScreen ~ data:`, data);
+  console.log(
+    `🚀 ~ file: index.tsx:25 ~ Index ~ data:`,
+    // data,
+    isLoading,
+    error,
+    JSON.stringify(data, null, 2)
+  );
   return (
     <ThemedView style={styles.container}>
       <ThemedText>HomeScreen</ThemedText>
-      <Link href="/welcome" asChild>
-        <ThemedText type="link">Go to Welcomescreen</ThemedText>
+      <Link href="/welcome" style={textStyles.link}>
+        Go to Welcomescreen
       </Link>
-      <Link href="/image/452" asChild>
-        <ThemedText type="link">Go to Image 452</ThemedText>
+      <Link href="/image/452" style={textStyles.link}>
+        Go to Image 452
       </Link>
     </ThemedView>
   );

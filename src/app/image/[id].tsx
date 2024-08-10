@@ -9,7 +9,7 @@ const ImageDetailsScreen = () => {
   const { id } = useLocalSearchParams();
   return (
     <ThemedView style={styles.container}>
-      <Stack.Screen options={{ title: `image details - ${id}`, }} />
+      <Stack.Screen options={{ title: `image details - ${id}`,presentation:"fullScreenModal", animation:"slide_from_bottom" }} />
       <ThemedText>ImageDetailsScreen----- {id ?? "n/a"}</ThemedText>
     </ThemedView>
   );
