@@ -2,7 +2,7 @@ import { Dimensions, Platform, StatusBar, StyleSheet } from "react-native";
 
 const { width: deviceWidth, height: deviceHeight } = Dimensions.get("window");
 
-export const CONSTANTS = {
+export const constants = {
   spacingLXX: 32,
   spacingLX: 24,
   spacingL: 20,

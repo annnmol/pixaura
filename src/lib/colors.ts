@@ -31,6 +31,9 @@ export const colors = {
     // tabIconSelected: tintColorLight,
     tabIconDefault: grey,
     tabIconSelected: primary,
+    primary,
+    primaryLight,
+    primaryDark,
   },
   dark: {
     text: '#ECEDEE',
@@ -41,5 +44,8 @@ export const colors = {
     // tabIconSelected: tintColorDark,
     tabIconDefault: grey,
     tabIconSelected: primary,
+    primary,
+    primaryLight,
+    primaryDark,
   },
 };

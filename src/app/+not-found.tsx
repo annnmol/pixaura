@@ -3,7 +3,7 @@ import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { Image } from "expo-image";
 
 //custom imports
-import { CONSTANTS } from "@src/lib/helpers";
+import { constants } from "@src/lib/helpers";
 
 export default function NotFoundScreen() {
   return (
@@ -41,7 +41,7 @@ const styles = StyleSheet.create({
     paddingVertical: 15,
   },
   image: {
-    width: CONSTANTS.deviceWidth - 80,
+    width: constants.deviceWidth - 80,
     height: 320,
   },
 
