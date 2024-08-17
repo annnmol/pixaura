@@ -30,7 +30,7 @@ export default function RootLayout() {
 
   return (
     <GlobalContextProvider>
-    <Stack screenOptions={{headerShown:false}} />
+    <Stack screenOptions={{headerShown:false}} initialRouteName="home"/>
     </GlobalContextProvider>
   );
 }

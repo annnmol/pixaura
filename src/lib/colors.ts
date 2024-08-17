@@ -1,51 +1,74 @@
 /**
  * Below are the colors that are used in the app. The colors are defined in the light and dark mode.
- * There are many other ways to style your app. For example, [Nativewind](https://www.nativewind.dev/), [Tamagui](https://tamagui.dev/), [unistyles](https://reactnativeunistyles.vercel.app), etc.
  */
 
-const tintColorLight = '#0a7ea4';
-const tintColorDark = '#fff';
+import { Appearance } from "react-native";
+
+const colorScheme = Appearance.getColorScheme() ?? "light";
+
+const tintColorLight = "#128C7E";
+const tintColorDark = "#fff";
 const primary = "#128C7E";
-const primaryLight = "#25D366";
 const primaryDark = "#075E54";
-const yellowLight = "#DCF8C6";
-const pinkLight = "#ECE5DD";
-const grey = "#A9ACB6";
-const blue = '#1063FD';
-// muted: '#3A5A92',
-const background = '#EFEEF6';
-const gray= '#6E6E73';
-const lightGray = '#DCDCE2';
-const green= '#4FEE57';
-// lightGreen: '#DBFFCB';
-const red = '#EF0827';
-const yellow='#FCC70B';
+
+export const lightBackground = "#ECEDEE";
+export const darkBackground = "#151718";
+export const lightText = "#11181C";
+export const darkText = "#ECEDEE";
+
+const green = "#4FEE57";
+const red = "#EF0827";
+const yellow = "#FCC70B";
 
 export const colors = {
   light: {
-    text: '#11181C',
-    background: '#fff',
+    text: lightText,
+    background: lightBackground,
+    card: "#fff",
+    // background: "#fff",
     tint: tintColorLight,
-    icon: '#687076',
-    // tabIconDefault: '#687076',
-    // tabIconSelected: tintColorLight,
-    tabIconDefault: grey,
-    tabIconSelected: primary,
-    primary,
-    primaryLight,
-    primaryDark,
+    icon: "#687076",
+    tabIconDefault: "#687076",
+    tabIconSelected: tintColorLight,
+    primary: primary,
+    primaryDark: primaryDark,
+    onPrimary: "#ECEDEE",
+    red: red,
+    green: green,
+    yellow: yellow,
+    white: "#ffffff",
   },
   dark: {
-    text: '#ECEDEE',
-    background: '#151718',
+    text: darkText,
+    background: darkBackground,
+    card: "#121212",
     tint: tintColorDark,
-    icon: '#9BA1A6',
-    // tabIconDefault: '#9BA1A6',
-    // tabIconSelected: tintColorDark,
-    tabIconDefault: grey,
-    tabIconSelected: primary,
-    primary,
-    primaryLight,
-    primaryDark,
+    icon: "#9BA1A6",
+    tabIconDefault: "#9BA1A6",
+    tabIconSelected: tintColorDark,
+    primary: primary,
+    primaryDark: primaryDark,
+    onPrimary: "#ECEDEE",
+    red: red,
+    green: green,
+    yellow: yellow,
+    white: "#ffffff",
   },
 };
+
+export type ThemeKeys = keyof typeof colors.light & keyof typeof colors.dark;
+
+export const theme = colors[colorScheme];
+
+export function getThemeColor(
+  props: { light?: string; dark?: string },
+  colorName: keyof typeof colors.light & keyof typeof colors.dark
+) {
+  const colorFromProps = props[colorScheme];
+
+  if (colorFromProps) {
+    return colorFromProps;
+  } else {
+    return colors[colorScheme][colorName];
+  }
+}

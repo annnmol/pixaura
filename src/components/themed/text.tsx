@@ -1,10 +1,12 @@
 import { Text, type TextProps, StyleSheet } from "react-native";
 
 import { useThemeColor } from "@/src/hooks/useThemeColor";
+import { ThemeKeys } from "@/src/lib/colors";
 
 export type ThemedTextProps = TextProps & {
   lightColor?: string;
   darkColor?: string;
+  themeKey?: ThemeKeys;
   type?:
     | "default"
     | "title"
@@ -18,13 +20,14 @@ export function ThemedText({
   style,
   lightColor,
   darkColor,
+  themeKey = "text",
   type = "default",
   ...rest
 }: ThemedTextProps) {
-  const color = useThemeColor({ light: lightColor, dark: darkColor }, "text");
+  const color = useThemeColor({ light: lightColor, dark: darkColor }, themeKey);
 
   const combinedStyles = [{ color }, textStyles[type], style];
-  
+
   return <Text style={combinedStyles} {...rest} />;
 }
 
@@ -43,10 +46,12 @@ export const textStyles = StyleSheet.create({
     fontSize: 32,
     lineHeight: 32,
     fontFamily: "InterBold",
+    letterSpacing: 0.25,
   },
   subtitle: {
     fontSize: 20,
     fontFamily: "InterBold",
+    letterSpacing: 0.25,
   },
   link: {
     fontSize: 16,

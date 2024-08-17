@@ -1,18 +1,22 @@
 import { http } from "@/src/lib/network";
+import { formatUrlParams } from "../lib/helpers";
 
 let SERVER_BASE_URL =
   (process.env?.EXPO_PUBLIC_SERVER_URL! as string) ??
   "https://pixabay.com/api/";
-// SERVER_BASE_URL = SERVER_BASE_URL + "api/v1";
 const API_KEY = (process.env?.EXPO_PUBLIC_API_KEY! as string) ?? "1234";
+SERVER_BASE_URL = SERVER_BASE_URL + `?key=${API_KEY}&per_page=10&`;
 
 export class ImagesNetworkService {
+  static searchImages(params: any) {
+    const url = SERVER_BASE_URL + formatUrlParams(params, ["q"]);
+    return http.get(url);
+  }
 
-  static searchImages() {
-    // return http.get(`${SERVER_BASE_URL}${Endpoints.GET_ALL_FLIGHTS}`);
-    return http.get(
-      `https://pixabay.com/api/?key=45372168-dcb5d72298f85a485a1a06923&q=yellow+flowers&image_type=photo&pretty=true`
-    );
+  static getImage(id: string) {
+      
+    const url = SERVER_BASE_URL + `&id=${id}`;
+    return http.get(url);
   }
 }
 

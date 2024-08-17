@@ -1,5 +1,7 @@
-import { SafeAreaView,type ViewProps } from "react-native";
+import { SafeAreaView, type ViewProps } from "react-native";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 
+//custom imports
 import { useThemeColor } from "@/src/hooks/useThemeColor";
 
 export type ThemedSafeAreaViewProps = ViewProps & {
@@ -18,5 +20,14 @@ export function ThemedSafeAreaView({
     "background"
   );
 
-  return <SafeAreaView style={[{ backgroundColor }, style]} {...otherProps} />;
+  const insets = useSafeAreaInsets();
+
+  const paddingTop = insets.top ?? 0;
+
+  return (
+    <SafeAreaView
+      style={[{ backgroundColor, paddingTop }, style]}
+      {...otherProps}
+    />
+  );
 }

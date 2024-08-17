@@ -37,7 +37,7 @@ const WelcomeScreen = () => {
     >
       {/* Linear Gradient */}
       <Animated.View
-        entering={FadeInDown.duration(400)}
+        entering={FadeInDown.duration(200)}
         style={styles.container}
       >
         <LinearGradient
@@ -49,19 +49,19 @@ const WelcomeScreen = () => {
 
         <View style={styles.contentBox}>
           <Animated.Text
-            entering={FadeInDown.delay(200).springify()}
+            entering={FadeInDown.delay(100).springify()}
             style={textStyles.title}
           >
             Pixaura
           </Animated.Text>
           <Animated.Text
-            entering={FadeInDown.delay(300).springify()}
+            entering={FadeInDown.delay(200).springify()}
             style={textStyles.defaultSemiBold}
           >
             Your daily dose of visual vitamin D.
           </Animated.Text>
           <Animated.View
-            entering={FadeInDown.delay(400).springify()}
+            entering={FadeInDown.delay(300).springify()}
             style={styles.btnContainer}
           >
             <ThemedButton

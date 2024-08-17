@@ -5,10 +5,13 @@ import {
 } from "@react-navigation/native";
 import { QueryClientProvider } from "@tanstack/react-query";
 import { PropsWithChildren, createContext } from "react";
+import { GestureHandlerRootView } from "react-native-gesture-handler";
+import Toast from "react-native-toast-message";
+
 //custom imports
 import { useColorScheme } from "@/src/hooks/useColorScheme";
 import { queryClient } from "@/src/lib/tanstack-query";
-import { GestureHandlerRootView } from "react-native-gesture-handler";
+import { toastConfig } from "@/src/components/themed/toast";
 
 interface IGlobalContext {
   // authUser: IData | undefined;
@@ -29,6 +32,7 @@ export const GlobalContextProvider = ({ children }: PropsWithChildren) => {
         <ThemeProvider value={colorScheme === "dark" ? DarkTheme : DefaultTheme}>
           <QueryClientProvider client={queryClient}>
             {children}
+            <Toast config={toastConfig}/>
           </QueryClientProvider>
         </ThemeProvider>
       </GlobalContext.Provider>
