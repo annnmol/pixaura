@@ -26,6 +26,7 @@ import { ImageCategories } from "@/src/lib/image-helpers";
 import { ImagesNetworkService } from "@/src/services/images-network-service";
 import { useAppStore } from "@/src/store";
 import { PixImageType } from "@/types/image-service";
+import HomeFilters from "@/src/components/home/home-filters";
 
 const HomeScreen = () => {
   //state
@@ -76,7 +77,8 @@ const HomeScreen = () => {
   });
 
   function handleFilterPress() {
-    restartApp();
+    // restartApp();
+
   }
 
   function onHeaderLogoPress() {
@@ -128,13 +130,14 @@ const HomeScreen = () => {
                 </Header.Left>
                 <Header.Right>
                   <ToggleTheme />
-                  <TouchableOpacity onPress={handleFilterPress}>
+                  <HomeFilters />
+                  {/* <TouchableOpacity onPress={handleFilterPress}>
                     <MaterialCommunityIcons
                       name="filter-variant"
                       size={24}
                       color={theme.onPrimary}
                     />
-                  </TouchableOpacity>
+                  </TouchableOpacity> */}
                 </Header.Right>
               </Header>
             );

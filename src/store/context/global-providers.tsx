@@ -12,6 +12,7 @@ import Toast from "react-native-toast-message";
 import { useColorScheme } from "@/src/hooks/useColorScheme";
 import { queryClient } from "@/src/lib/tanstack-query";
 import { toastConfig } from "@/src/lib/toast";
+import { BottomSheetModalProvider } from "@gorhom/bottom-sheet";
 
 interface IGlobalContext {
   // authUser: IData | undefined;
@@ -29,10 +30,12 @@ export const GlobalContextProvider = ({ children }: PropsWithChildren) => {
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>
       <GlobalContext.Provider value={{}}>
-        <ThemeProvider value={colorScheme === "dark" ? DarkTheme : DefaultTheme}>
+        <ThemeProvider
+          value={colorScheme === "dark" ? DarkTheme : DefaultTheme}
+        >
           <QueryClientProvider client={queryClient}>
-            {children}
-            <Toast config={toastConfig}/>
+            <BottomSheetModalProvider>{children}</BottomSheetModalProvider>
+            <Toast config={toastConfig} />
           </QueryClientProvider>
         </ThemeProvider>
       </GlobalContext.Provider>

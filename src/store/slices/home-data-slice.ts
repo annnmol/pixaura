@@ -6,19 +6,19 @@ export interface IFilters {
   image_type: string;
   category: string;
   colors: string;
-  editors_choice: boolean;
-  safesearch: boolean;
+  editors_choice: "true" | "false";
+  safesearch: "true" | "false";
   order: string;
 }
 
-const defaultFilters: IFilters = {
+export const defaultFilters: IFilters = {
   q: "",
   image_type: "photo",
   category: "",
   colors: "",
   order: "popular",
-  editors_choice: true,
-  safesearch: true,
+  editors_choice: "true",
+  safesearch: "true",
 };
 
 export interface HomeDataSlice {
