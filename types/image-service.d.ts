@@ -1,6 +1,6 @@
 import { ImageCategories, ImageColors, ImageOrders, ImageTypes } from "@/src/lib/image-helpers";
 
-export interface PixImageServiceResponseType {
+export declare interface PixImageServiceResponseType {
   hits: PixImageType[];
   total: number;
   totalHits: number;
@@ -30,50 +30,6 @@ export interface PixImageType {
   webformatURL: string;
   webformatWidth: number;
 }
-
-// export const ImageTypes = ["all", "photo", "illustration", "vector"] as const;
-
-// export const ImageCategories = [
-//   "backgrounds",
-//   "fashion",
-//   "nature",
-//   "science",
-//   "education",
-//   "feelings",
-//   "health",
-//   "people",
-//   "religion",
-//   "places",
-//   "animals",
-//   "industry",
-//   "computer",
-//   "food",
-//   "sports",
-//   "transportation",
-//   "travel",
-//   "buildings",
-//   "business",
-//   "music",
-// ] as const;
-
-// export const ImageColors = [
-//   "grayscale",
-//   "transparent",
-//   "red",
-//   "orange",
-//   "yellow",
-//   "green",
-//   "turquoise",
-//   "blue",
-//   "lilac",
-//   "pink",
-//   "white",
-//   "gray",
-//   "black",
-//   "brown",
-// ] as const;
-
-// export const ImageOrders = ["popular", "latest"] as const;
 
 export interface PixImageFilterType {
   q?: string;

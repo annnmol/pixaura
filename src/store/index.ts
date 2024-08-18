@@ -5,10 +5,7 @@ import {
   AuthSessionSlice,
   createAuthSessionSlice,
 } from "./slices/auth-session-slice";
-import {
-  DashboardDataSlice,
-  createDashboardSliceSlice,
-} from "./slices/dashboard-data-slice";
+import { HomeDataSlice, createHomeSliceSlice } from "./slices/home-data-slice";
 import {
   LoadingStateSlice,
   createLoadingStateSlice,
@@ -16,14 +13,14 @@ import {
 import { SharedSlice, createSharedSlice } from "./slices/shared-slice";
 
 export const useAppStore = create<
-  LoadingStateSlice & AuthSessionSlice & SharedSlice & DashboardDataSlice
+  LoadingStateSlice & AuthSessionSlice & SharedSlice & HomeDataSlice
 >()(
   persist(
     (...a) => ({
       ...createAuthSessionSlice(...a),
       ...createLoadingStateSlice(...a),
       ...createSharedSlice(...a),
-      ...createDashboardSliceSlice(...a),
+      ...createHomeSliceSlice(...a),
     }),
     {
       name: "wabo-auth-session",

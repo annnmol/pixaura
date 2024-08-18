@@ -1,9 +1,11 @@
-import { Link, Stack } from "expo-router";
-import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { Image } from "expo-image";
+import { Stack } from "expo-router";
+import { StyleSheet, View } from "react-native";
 
 //custom imports
 import { constants } from "@/src/lib/helpers";
+import { ThemedText } from "../themed";
+import { textStyles } from "../themed/text";
 
 function ListEmptyComponent() {
   return (
@@ -14,15 +16,10 @@ function ListEmptyComponent() {
         style={styles.image}
         contentFit="contain"
       />
-      <Text style={styles.title}>{`Results not found.`}</Text>
-      <Text style={styles.body}>
-      When you have data you’ll see them here.{"\n"} Try again later.
-      </Text>
-      <Link href="/" asChild>
-        <TouchableOpacity style={styles.button}>
-          <Text style={styles.btnText}>Go back!</Text>
-        </TouchableOpacity>
-      </Link>
+      <ThemedText style={textStyles.subtitle}>{`No results found.`}</ThemedText>
+      <ThemedText style={textStyles.caption}>
+      When you have data you’ll see them here.{"\n"}
+      </ThemedText>
     </View>
   );
 }
@@ -32,11 +29,10 @@ export default ListEmptyComponent;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    height: constants.deviceHeight,
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: "#E5E9E8",
-    gap: 10,
+    gap: 12,
+    padding: 10,
   },
   link: {
     marginTop: 15,
@@ -44,7 +40,9 @@ const styles = StyleSheet.create({
   },
   image: {
     width: constants.deviceWidth - 80,
-    height: 220,
+    height: 200,
+    marginTop: 50,
+
   },
 
   title: {
@@ -52,13 +50,15 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     fontSize: 25,
     textAlign: "center",
+    marginTop: 12,
+
   },
 
   body: {
     color: "#000",
     fontWeight: "600",
     fontSize: 14,
-    marginVertical: 10,
+    // marginVertical: 2,
   },
 
   button: {

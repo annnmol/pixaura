@@ -12,7 +12,7 @@ import { textStyles } from "./text";
 // Define the button's props type, extending TouchableOpacityProps for React Native
 interface ButtonProps extends TouchableOpacityProps {
   type?: "primary" | "outline" | "text" | "grey" | "danger";
-  textType?: "default" | "title" | "defaultSemiBold" | "subtitle" | "link" | "caption";
+  textType?: "default" | "title" | "defaultSemiBold" | "subtitle" | "link" | "caption" | "heading";
   children: React.ReactNode;
   textProps?: TextProps; // Add this line
 }

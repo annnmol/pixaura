@@ -64,7 +64,7 @@ Header.Right = memo(({ children }: PropsWithChildren) => {
 Header.Title = memo(({ children }: PropsWithChildren) => {
   // const { name } = useHeaderContext();
   return (
-    <ThemedText type="subtitle" numberOfLines={1} lightColor={theme.white} darkColor={theme.white}>
+    <ThemedText type="heading" numberOfLines={1} lightColor={theme.white} darkColor={theme.white}>
       {children}
     </ThemedText>
   );
@@ -86,7 +86,7 @@ Header.LeftBack = memo(() => {
 const styles = StyleSheet.create({
   container: {
     // height: 52,
-    paddingVertical: constants.spacingM,
+    paddingVertical: constants.spacingS,
     paddingHorizontal: constants.spacing,
     flexDirection: "row",
     alignItems: "center",
@@ -115,9 +115,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
     gap: 12,
   },
-  title: {
-    color: theme.tint,
-  }
 });
 
 export default Header;

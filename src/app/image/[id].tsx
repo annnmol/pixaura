@@ -17,13 +17,14 @@ import { ThemedText } from "@/src/components/themed";
 import Header from "@/src/components/ui/header";
 import { blurhash } from "@/src/lib/helpers";
 import { ImagesNetworkService } from "@/src/services/images-network-service";
+import { PixImageServiceResponseType } from "@/types/image-service";
 
 const ImageDetailsScreen = () => {
   const { id } = useLocalSearchParams();
 
   const { data, isLoading, error, refetch } = useQuery({
     queryKey: ["image", id],
-    queryFn: async () => await ImagesNetworkService.getImage(id as string),
+    queryFn: async () => await ImagesNetworkService.getImage(id as string).then((res)=> console.table(res)),
   });
 
   async function handleShare(url: string) {

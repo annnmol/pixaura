@@ -10,7 +10,7 @@ export const createAuthSessionSlice: StateCreator<AuthSessionSlice> = (
   set
 ) => ({
   authSession: { name: "Anmol Tanwar" },
-  setAuthSession: async (payload: IData | null) => {
+  setAuthSession: (payload: IData | null) => {
     set({ authSession: payload });
   },
   logoutAuthSession: () => {

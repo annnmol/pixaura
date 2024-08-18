@@ -7,7 +7,7 @@ import {
   useImperativeHandle,
   useRef,
 } from "react";
-import { StyleSheet, TextInput, TouchableOpacity, View } from "react-native";
+import { StyleSheet, TextInput, TouchableOpacity, View, ViewProps, ViewStyle } from "react-native";
 
 //custom imports
 import { useThemeColor } from "@/src/hooks/useThemeColor";
@@ -18,6 +18,8 @@ const DEBOUCE_TIME = 1000;
 interface SearchProps {
   onSearch: (query: string) => void;
   debounceTime?: number;
+  inputProps?: TextInput["props"];
+  viewStyles?: ViewStyle;
 }
 
 export interface SearchComponentRef {
@@ -82,7 +84,7 @@ function Search(props: SearchProps, ref: ForwardedRef<SearchComponentRef>) {
   }, [debouncedQuery]);
 
   return (
-    <View style={styles.searchBarContainer}>
+    <View style={[styles.searchBarContainer,props.viewStyles]}>
       <View style={styles.searchIcon}>
         <Ionicons name="search" size={24} color={"grey"} />
       </View>
@@ -95,6 +97,7 @@ function Search(props: SearchProps, ref: ForwardedRef<SearchComponentRef>) {
         onChangeText={onChangeText}
         style={[styles.input, { color: color }]}
         placeholderTextColor={"grey"}
+        {...props?.inputProps}
       />
       <TouchableOpacity
         style={styles.closeIcon}

@@ -3,14 +3,9 @@ import { ActivityIndicator, StyleSheet, View } from "react-native";
 //custom imports
 import { theme } from "@/src/lib/colors";
 
-interface ListFooterComponentProps {
-  dataLength?: number;
-}
-
-function ListFooterComponent({ dataLength = 20 }: ListFooterComponentProps) {
-  const marginVertical = dataLength > 0 ? 20 : 50;
+function ListFooterComponent() {
   return (
-    <View style={[styles.container, { marginVertical }]}>
+    <View style={[styles.container]}>
       <ActivityIndicator size="large" color={theme.primary} />
     </View>
   );
@@ -24,5 +19,6 @@ const styles = StyleSheet.create({
     padding: 10,
     justifyContent: "center",
     alignItems: "center",
+    marginVertical: 20,
   },
 });

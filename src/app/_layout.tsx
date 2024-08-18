@@ -2,7 +2,12 @@ import { useFonts } from "expo-font";
 import { Stack } from "expo-router";
 import * as SplashScreen from "expo-splash-screen";
 import { useEffect } from "react";
+import { LogBox } from "react-native";
 import "react-native-reanimated";
+
+// LogBox.ignoreLogs([
+//   '[Reanimated] Reduced motion setting is enabled on this device.',
+// ]);
 
 //custom imports
 import { GlobalContextProvider } from "@/src/store/context/global-providers";

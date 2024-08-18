@@ -13,7 +13,8 @@ export type ThemedTextProps = TextProps & {
     | "defaultSemiBold"
     | "subtitle"
     | "link"
-    | "caption";
+    | "caption"
+    | "heading";
 };
 
 export function ThemedText({
@@ -45,6 +46,12 @@ export const textStyles = StyleSheet.create({
   title: {
     fontSize: 32,
     lineHeight: 32,
+    fontFamily: "InterBold",
+    letterSpacing: 0.25,
+  },
+  heading: {
+    fontSize: 24,
+    lineHeight: 24,
     fontFamily: "InterBold",
     letterSpacing: 0.25,
   },

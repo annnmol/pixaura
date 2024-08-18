@@ -8,13 +8,14 @@ const API_KEY = (process.env?.EXPO_PUBLIC_API_KEY! as string) ?? "1234";
 SERVER_BASE_URL = SERVER_BASE_URL + `?key=${API_KEY}&per_page=10&`;
 
 export class ImagesNetworkService {
-  static searchImages(params: any) {
+  static async searchImages(params: any) {
     const url = SERVER_BASE_URL + formatUrlParams(params, ["q"]);
+    
+    //return as a promise
     return http.get(url);
   }
 
-  static getImage(id: string) {
-      
+  static async getImage(id: string) {
     const url = SERVER_BASE_URL + `&id=${id}`;
     return http.get(url);
   }
