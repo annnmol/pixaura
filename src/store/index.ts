@@ -5,27 +5,38 @@ import {
   AuthSessionSlice,
   createAuthSessionSlice,
 } from "./slices/auth-session-slice";
-import { HomeDataSlice, createHomeSliceSlice } from "./slices/home-data-slice";
+import { HomeDataSlice, createHomeDataSlice } from "./slices/home-data-slice";
 import {
   LoadingStateSlice,
   createLoadingStateSlice,
 } from "./slices/loading-state-slice";
 import { SharedSlice, createSharedSlice } from "./slices/shared-slice";
+import {
+  SystemDataSlice,
+  createSystemDataSlice,
+} from "./slices/system-data-slice";
 
 export const useAppStore = create<
-  LoadingStateSlice & AuthSessionSlice & SharedSlice & HomeDataSlice
+  LoadingStateSlice &
+    AuthSessionSlice &
+    SharedSlice &
+    HomeDataSlice &
+    SystemDataSlice
 >()(
   persist(
     (...a) => ({
       ...createAuthSessionSlice(...a),
       ...createLoadingStateSlice(...a),
       ...createSharedSlice(...a),
-      ...createHomeSliceSlice(...a),
+      ...createHomeDataSlice(...a),
+      ...createSystemDataSlice(...a),
     }),
     {
       name: "wabo-auth-session",
       storage: createJSONStorage(() => AsyncStorage),
-      partialize: (state) => ({ authSession: state.authSession }),
+      partialize: (state) => ({
+        authSession: state.authSession, // Persist only authSession
+      }),
     }
   )
 );

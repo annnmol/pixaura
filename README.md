@@ -13,6 +13,9 @@ eas login
 npx expo prebuild -p android
 
 #### COMMAND - BUILD
+npx expo run:android --variant release
+
+#### COMMAND - BUILD
 eas build --profile development --platform android
 
 ### DEPENDENCIES

@@ -27,7 +27,7 @@ export interface HomeDataSlice {
   resetHomeData: () => void;
 }
 
-export const createHomeSliceSlice: StateCreator<HomeDataSlice> = (set) => ({
+export const createHomeDataSlice: StateCreator<HomeDataSlice> = (set) => ({
   filters: defaultFilters,
   // setFilters: (payload: IFilters) => {
   //   set({ filters: payload });

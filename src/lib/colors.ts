@@ -4,7 +4,7 @@
 
 import { Appearance } from "react-native";
 
-const colorScheme = Appearance.getColorScheme() ?? "light";
+export const colorScheme = Appearance.getColorScheme() ?? "light";
 
 const tintColorLight = "#128C7E";
 const tintColorDark = "#fff";

@@ -13,7 +13,7 @@ import { useShallow } from "zustand/react/shallow";
 //custom imports
 import HomeCategoryChip from "@/src/components/home/category-chip";
 import HomeFeedCard from "@/src/components/home/feed-card";
-import { ThemedView } from "@/src/components/themed";
+import { ThemedView, ToggleTheme } from "@/src/components/themed";
 import Header from "@/src/components/ui/header";
 import ListEmptyComponent from "@/src/components/ui/list-empty-component";
 import ListFooterComponent from "@/src/components/ui/list-footer-component";
@@ -127,6 +127,7 @@ const HomeScreen = () => {
                 </TouchableOpacity>
                 </Header.Left>
                 <Header.Right>
+                  <ToggleTheme />
                   <TouchableOpacity onPress={handleFilterPress}>
                     <MaterialCommunityIcons
                       name="filter-variant"
