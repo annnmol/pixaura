@@ -11,7 +11,7 @@ import Toast from "react-native-toast-message";
 //custom imports
 import { useColorScheme } from "@/src/hooks/useColorScheme";
 import { queryClient } from "@/src/lib/tanstack-query";
-import { toastConfig } from "@/src/components/themed/toast";
+import { toastConfig } from "@/src/lib/toast";
 
 interface IGlobalContext {
   // authUser: IData | undefined;

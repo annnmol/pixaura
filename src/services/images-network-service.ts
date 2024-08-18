@@ -18,6 +18,8 @@ export class ImagesNetworkService {
   static async getImage(id: string) {
     const url = SERVER_BASE_URL + `&id=${id}`;
     return http.get(url);
+
+
   }
 }
 

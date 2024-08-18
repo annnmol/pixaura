@@ -1,9 +1,9 @@
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 import { useQuery } from "@tanstack/react-query";
-import { Image } from "expo-image";
+import * as FileSystem from "expo-file-system";
+import { ImageBackground } from "expo-image";
 import { Redirect, Stack, useLocalSearchParams } from "expo-router";
 import * as Sharing from "expo-sharing";
-import * as FileSystem from "expo-file-system";
 import React from "react";
 import {
   ActivityIndicator,
@@ -13,21 +13,30 @@ import {
 } from "react-native";
 
 //custom imports
-import { ThemedText } from "@/src/components/themed";
 import Header from "@/src/components/ui/header";
+import { theme } from "@/src/lib/colors";
+import { showHaptics } from "@/src/lib/haptics";
 import { blurhash } from "@/src/lib/helpers";
+import { showToast } from "@/src/lib/toast";
 import { ImagesNetworkService } from "@/src/services/images-network-service";
-import { PixImageServiceResponseType } from "@/types/image-service";
+import {
+  PixImageServiceResponseType
+} from "@/types/image-service";
 
 const ImageDetailsScreen = () => {
   const { id } = useLocalSearchParams();
 
   const { data, isLoading, error, refetch } = useQuery({
     queryKey: ["image", id],
-    queryFn: async () => await ImagesNetworkService.getImage(id as string).then((res)=> console.table(res)),
+    queryFn: () =>
+      ImagesNetworkService.getImage(id as string).then(
+        (res) => res as PixImageServiceResponseType
+      ),
   });
 
   async function handleShare(url: string) {
+    showHaptics("impactAsync");
+
     try {
       // Check if FileSystem.documentDirectory is not null
       if (!FileSystem.documentDirectory) {
@@ -47,54 +56,64 @@ const ImageDetailsScreen = () => {
         await Sharing.shareAsync(localUri);
       } else {
         console.log("Sharing is not available on this platform");
+        showToast({
+          text1: "Sharing is not available on this platform",
+        });
       }
     } catch (error) {
+      showToast({
+        text1: "Error downloading or sharing the image:",
+      });
       console.error("Error downloading or sharing the image:", error);
     }
   }
+
+  // const imageHeight = getImageHeight(image?.imageWidth, image?.imageHeight);
 
   if (!id) return <Redirect href="/home" />;
 
   return (
     <View style={styles.container}>
-      {/* <BlurView intensity={100} tint="dark" style={styles.blur}> */}
       <Stack.Screen
         options={{
           title: `image details - ${id}`,
-          presentation: "transparentModal",
           animation: "slide_from_bottom",
+          headerShown: true,
+          header: () => {
+            return (
+              <Header style={{ backgroundColor: "#000" }}>
+                <Header.LeftBack></Header.LeftBack>
+                <Header.Center>
+                  <Header.Title style={{ fontSize: 20 }}>
+                    Details: {id ?? "n/a"}{" "}
+                  </Header.Title>
+                </Header.Center>
+                <Header.Right>
+                  <TouchableOpacity
+                    activeOpacity={0.6}
+                    onPress={() =>
+                      handleShare(data?.hits?.[0]?.largeImageURL as string)
+                    }
+                  >
+                    <MaterialIcons
+                      name="share"
+                      size={24}
+                      color={theme.onPrimary}
+                    />
+                  </TouchableOpacity>
+                </Header.Right>
+              </Header>
+            );
+          },
         }}
       />
-      <Header>
-        <Header.LeftBack></Header.LeftBack>
-        <Header.Center>
-          <Header.Title>Details: {id ?? "n/a"} </Header.Title>
-        </Header.Center>
-      </Header>
-      <View style={styles.box}>
-        {isLoading ? <ActivityIndicator size="large" color="primary" /> : null}
-        <Image
-          source={{ uri: data?.hits?.[0]?.webformatURL as string }}
-          style={styles.image}
-          contentFit="cover"
-          placeholder={blurhash}
-          transition={100}
-        />
-        <ThemedText lightColor="#fff">
-          ImageDetailsScreen----- {id ?? "n/a"}
-        </ThemedText>
-
-        <View style={styles.actionBox}>
-          <TouchableOpacity
-            activeOpacity={0.6}
-            style={styles.btn}
-            onPress={() => handleShare(data?.hits?.[0]?.webformatURL as string)}
-          >
-            <MaterialIcons name="share" size={24} color="black" />
-          </TouchableOpacity>
-        </View>
-      </View>
-      {/* </BlurView> */}
+      {isLoading ? <ActivityIndicator size="large" color="primary" /> : null}
+      <ImageBackground
+        source={{ uri: data?.hits?.[0]?.largeImageURL as string }}
+        style={{ flex: 1 }}
+        contentFit="contain"
+        placeholder={blurhash}
+      />
     </View>
   );
 };
@@ -106,18 +125,7 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "rgba(0,0,0,0.95)",
   },
-  box: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-    padding: 20,
-    gap: 16,
-  },
-  image: {
-    width: "100%",
-    height: 400,
-    borderRadius: 16,
-  },
+
 
   actionBox: {
     flexDirection: "row",

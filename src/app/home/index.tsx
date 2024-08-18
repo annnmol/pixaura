@@ -1,49 +1,37 @@
+import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 import {
   FlashList,
   MasonryFlashList,
   MasonryFlashListRef,
 } from "@shopify/flash-list";
-import React, { useCallback, useRef, useState } from "react";
-import { NativeScrollEvent, NativeSyntheticEvent, StyleSheet, TextInput, TouchableOpacity } from "react-native";
+import { useInfiniteQuery } from "@tanstack/react-query";
+import { Stack } from "expo-router";
+import React, { useCallback, useRef } from "react";
+import { NativeScrollEvent, NativeSyntheticEvent, StyleSheet, TouchableOpacity } from "react-native";
 import { useShallow } from "zustand/react/shallow";
 
 //custom imports
-import { ThemedText, ThemedView } from "@/src/components/themed";
-// import data from "@/assets/dummy/data.json";
 import HomeCategoryChip from "@/src/components/home/category-chip";
 import HomeFeedCard from "@/src/components/home/feed-card";
-import { showHaptics } from "@/src/components/themed/haptics";
-import { showToast } from "@/src/components/themed/toast";
+import { ThemedView } from "@/src/components/themed";
 import Header from "@/src/components/ui/header";
 import ListEmptyComponent from "@/src/components/ui/list-empty-component";
 import ListFooterComponent from "@/src/components/ui/list-footer-component";
 import ListItemSeparator from "@/src/components/ui/list-item-separator";
 import Search, { SearchComponentRef } from "@/src/components/ui/search";
-import { useThemeColor } from "@/src/hooks/useThemeColor";
 import { theme } from "@/src/lib/colors";
+import { showHaptics } from "@/src/lib/haptics";
 import { restartApp } from "@/src/lib/helpers";
 import { ImageCategories } from "@/src/lib/image-helpers";
 import { ImagesNetworkService } from "@/src/services/images-network-service";
 import { useAppStore } from "@/src/store";
 import { PixImageType } from "@/types/image-service";
-import Ionicons from "@expo/vector-icons/Ionicons";
-import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
-import { useInfiniteQuery } from "@tanstack/react-query";
-import { Stack } from "expo-router";
-import { FlatList } from "react-native-gesture-handler";
 
 const HomeScreen = () => {
   //state
   const filters = useAppStore(useShallow((state) => state.filters));
   const setFilters = useAppStore(useShallow((state) => state.setFilters));
-  // const [filters, setFilters] = useState({
-  //   q: "",
-  //   editor_choice: false,
-  //   image_type: "photo",
-  //   category: "",
-  //   colors: "",
-  //   order: "popular",
-  // });
+
   //refs
   const searchComponentRef = useRef<SearchComponentRef>(null);
   const CategoryflashListRef = useRef<FlashList<any>>(null);
@@ -55,12 +43,12 @@ const HomeScreen = () => {
   const {
     data,
     isLoading,
-    error,
+    // error,
     fetchNextPage,
-    hasNextPage,
-    isFetching,
-    isFetchingNextPage,
-    status,
+    // hasNextPage,
+    // isFetching,
+    // isFetchingNextPage,
+    // status,
     refetch,
     isRefetching,
   } = useInfiniteQuery({
@@ -88,13 +76,7 @@ const HomeScreen = () => {
   });
 
   function handleFilterPress() {
-    // Show toast
-    // showHaptics("impactAsync");
-    // showToast({
-    //   text1: "Refetching images with new filters",
-    // });
     restartApp();
-    // refetch(filters);
   }
 
   function onHeaderLogoPress() {
@@ -105,10 +87,6 @@ const HomeScreen = () => {
   function onSearch(q: string) {
     setFilters((currentFilters) => {
       const temp = { ...currentFilters, q: q };
-      // console.log(
-      //   `🚀 ~ file: index.tsx:84 ~ fetchSearchResults ~ searchQuery:`,
-      //   temp
-      // );
       return temp;
     });
   }
@@ -127,10 +105,6 @@ const HomeScreen = () => {
       if (currentFilters.category === newValue) newValue = "";
 
       const temp = { ...currentFilters, category: newValue };
-      // console.log(
-      //   `🚀 ~ file: index.tsx:84 ~ fetchSearchResults ~ searchQuery:`,
-      //   temp
-      // );
       return temp;
     });
   }
@@ -153,9 +127,6 @@ const HomeScreen = () => {
                 </TouchableOpacity>
                 </Header.Left>
                 <Header.Right>
-                  {/* <TouchableOpacity onPress={onHeaderSearchIconPress}>
-                    <Ionicons name="search" size={24} color={theme.onPrimary} />
-                  </TouchableOpacity> */}
                   <TouchableOpacity onPress={handleFilterPress}>
                     <MaterialCommunityIcons
                       name="filter-variant"
@@ -173,7 +144,7 @@ const HomeScreen = () => {
       <Search
         onSearch={onSearch}
         ref={searchComponentRef}
-        viewStyles={{ marginHorizontal: 16, marginTop: 12 }}
+        viewStyles={{ marginHorizontal: 16, marginTop: 8 }}
       />
       <FlashList
         ref={CategoryflashListRef}
@@ -235,9 +206,5 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     gap: 16,
-    // marginTop:50
-    // justifyContent: "center",
-    // alignItems: "center",
-    // backgroundColor: "green",
   },
 });

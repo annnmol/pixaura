@@ -1,7 +1,7 @@
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 import { useRouter } from "expo-router";
 import { PropsWithChildren, ReactNode, memo } from "react";
-import { StyleSheet, TouchableOpacity, View } from "react-native";
+import { StyleSheet, TextProps, TouchableOpacity, View, ViewStyle } from "react-native";
 
 //custom imports
 import { constants } from "@/src/lib/helpers";
@@ -29,16 +29,17 @@ import { darkBackground, theme } from "@/src/lib/colors";
 // Define the Header Props
 interface HeaderProps {
   children?: ReactNode;
+  style?:ViewStyle
 }
 
 // Compound Component: Header
-const Header = ({ children }: HeaderProps) => {
+const Header = ({ children,style }: HeaderProps) => {
   //   const value = useMemo(() => ({ name }), [name]); // Memoize context value
   const insets = useSafeAreaInsets();
 
   const paddingTop = (insets.top ?? 0) + 16;
   return (
-    <ThemedView lightColor={theme.primary} darkColor={darkBackground} style={[styles.container,{paddingTop}]}>
+    <ThemedView lightColor={theme.primary} darkColor={darkBackground} style={[styles.container,{paddingTop},style]}>
       {/* <HeaderContext.Provider value={value}>{children}</HeaderContext.Provider> */}
       {children}
     </ThemedView>
@@ -61,10 +62,10 @@ Header.Right = memo(({ children }: PropsWithChildren) => {
 });
 
 // Compound Component: Header.Title
-Header.Title = memo(({ children }: PropsWithChildren) => {
+Header.Title = memo(({ children, ...props }: PropsWithChildren & TextProps) => {
   // const { name } = useHeaderContext();
   return (
-    <ThemedText type="heading" numberOfLines={1} lightColor={theme.white} darkColor={theme.white}>
+    <ThemedText type="heading" numberOfLines={1} lightColor={theme.white} darkColor={theme.white} {...props}>
       {children}
     </ThemedText>
   );
@@ -86,7 +87,7 @@ Header.LeftBack = memo(() => {
 const styles = StyleSheet.create({
   container: {
     // height: 52,
-    paddingVertical: constants.spacingS,
+    paddingVertical: constants.spacingM,
     paddingHorizontal: constants.spacing,
     flexDirection: "row",
     alignItems: "center",

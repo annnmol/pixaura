@@ -1,37 +1,26 @@
+/*
+  1. Create the config
+  2. Pass the config as prop to the Toast component instance
+*/
+
 import { Image } from "expo-image";
 import { StyleSheet, Text, View } from "react-native";
 import Toast, { ToastShowParams } from "react-native-toast-message";
 
 //custom imports
-import { textStyles } from "./text";
 
-Toast.show({
-  // type: 'error', // 'success | 'error' | 'info'
-  position: "bottom",
-  // text1: 'Notification',
-  text1:
-    "A pikachu appeared nearby ! anmol singh tanwar bhai shab kaisha hai yar tu toh acha banda hai na bhut fir kya hua",
-  // text1: 'A pikachu appeared nearby ! ',
-  bottomOffset: 64,
-  visibilityTime: 2000, // 4 seconds
-  autoHide: true, // Automatically dismiss the toast
-});
 
 export function showToast(params: ToastShowParams) {
   return Toast.show({
-      ...params,
-      type: params?.type ?? "info", // 'success | 'error' | 'info'
-      position: params?.position ?? "bottom",
-      bottomOffset: params?.bottomOffset ?? 64,
-      visibilityTime: params?.visibilityTime ?? 2000, // 2 seconds
-      autoHide: true, // Automatically dismiss the toast
+    ...params,
+    type: params?.type ?? "info", // 'success | 'error' | 'info'
+    position: params?.position ?? "top",
+    bottomOffset: params?.bottomOffset ?? 100,
+    visibilityTime: params?.visibilityTime ?? 2000, // 2 seconds
+    autoHide: true, // Automatically dismiss the toast
   });
 }
 
-/*
-  1. Create the config
-  2. Pass the config as prop to the Toast component instance
-*/
 export const toastConfig = {
   success: ({ text1 }: any) => {
     return (
@@ -41,7 +30,7 @@ export const toastConfig = {
           style={styles.logo}
           contentFit="contain"
         />
-        <Text style={[textStyles.caption, styles.text1]} numberOfLines={2}>
+        <Text style={[styles.caption, styles.text1]} numberOfLines={2}>
           {text1}
         </Text>
       </View>
@@ -56,7 +45,7 @@ export const toastConfig = {
           style={styles.logo}
           contentFit="contain"
         />
-        <Text style={[textStyles.caption, styles.text1]} numberOfLines={2}>
+        <Text style={[styles.caption, styles.text1]} numberOfLines={2}>
           {text1}
         </Text>
       </View>
@@ -71,7 +60,7 @@ export const toastConfig = {
           style={styles.logo}
           contentFit="contain"
         />
-        <Text style={[textStyles.caption, styles.text1]} numberOfLines={2}>
+        <Text style={[styles.caption, styles.text1]} numberOfLines={2}>
           {text1}
         </Text>
       </View>
@@ -105,5 +94,9 @@ const styles = StyleSheet.create({
   },
   info: {
     backgroundColor: "#739BE5",
+  },
+  caption: {
+    fontSize: 14,
+    lineHeight: 20,
   },
 });
