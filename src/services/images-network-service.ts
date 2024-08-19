@@ -18,8 +18,11 @@ export class ImagesNetworkService {
   static async getImage(id: string) {
     const url = SERVER_BASE_URL + `&id=${id}`;
     return http.get(url);
+  }
 
-
+  static async getGithubUser(id: string) {
+    const url = "https://api.github.com/users/" + `${id}`;
+    return http.get(url);
   }
 }
 

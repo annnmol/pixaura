@@ -1,32 +1,34 @@
-import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 import {
   FlashList,
   MasonryFlashList,
   MasonryFlashListRef,
 } from "@shopify/flash-list";
 import { useInfiniteQuery } from "@tanstack/react-query";
-import { Stack } from "expo-router";
+import { Link, Stack } from "expo-router";
 import React, { useCallback, useRef } from "react";
-import { NativeScrollEvent, NativeSyntheticEvent, StyleSheet, TouchableOpacity } from "react-native";
+import {
+  NativeScrollEvent,
+  NativeSyntheticEvent,
+  StyleSheet,
+  TouchableOpacity,
+} from "react-native";
 import { useShallow } from "zustand/react/shallow";
 
 //custom imports
 import HomeCategoryChip from "@/src/components/home/category-chip";
 import HomeFeedCard from "@/src/components/home/feed-card";
+import HomeFilters from "@/src/components/home/home-filters";
 import { ThemedView, ToggleTheme } from "@/src/components/themed";
 import Header from "@/src/components/ui/header";
 import ListEmptyComponent from "@/src/components/ui/list-empty-component";
 import ListFooterComponent from "@/src/components/ui/list-footer-component";
 import ListItemSeparator from "@/src/components/ui/list-item-separator";
 import Search, { SearchComponentRef } from "@/src/components/ui/search";
-import { theme } from "@/src/lib/colors";
 import { showHaptics } from "@/src/lib/haptics";
-import { restartApp } from "@/src/lib/helpers";
 import { ImageCategories } from "@/src/lib/image-helpers";
 import { ImagesNetworkService } from "@/src/services/images-network-service";
 import { useAppStore } from "@/src/store";
 import { PixImageType } from "@/types/image-service";
-import HomeFilters from "@/src/components/home/home-filters";
 
 const HomeScreen = () => {
   //state
@@ -37,8 +39,6 @@ const HomeScreen = () => {
   const searchComponentRef = useRef<SearchComponentRef>(null);
   const CategoryflashListRef = useRef<FlashList<any>>(null);
   const masonryFlashListRef = useRef<MasonryFlashListRef<any>>(null);
-
-  
 
   //data fetching
   const {
@@ -78,11 +78,10 @@ const HomeScreen = () => {
 
   function handleFilterPress() {
     // restartApp();
-
   }
 
   function onHeaderLogoPress() {
-    masonryFlashListRef?.current?.scrollToOffset({ offset: 0, animated: true });
+    // masonryFlashListRef?.current?.scrollToOffset({ offset: 0, animated: true });
     showHaptics("impactAsync");
   }
 
@@ -111,9 +110,6 @@ const HomeScreen = () => {
     });
   }
 
-  const handleScroll = useCallback((event:NativeSyntheticEvent<NativeScrollEvent>) => {
-    // const yOffset = event.nativeEvent.contentOffset.y;
-  }, []);
 
   return (
     <ThemedView style={styles.container}>
@@ -124,9 +120,11 @@ const HomeScreen = () => {
             return (
               <Header>
                 <Header.Left>
-                <TouchableOpacity onPress={onHeaderLogoPress}>
-                    <Header.Title>Pixaura</Header.Title>
-                </TouchableOpacity>
+                  <Link href="/about" asChild>
+                    <TouchableOpacity onPress={onHeaderLogoPress}>
+                      <Header.Title>Pixaura</Header.Title>
+                    </TouchableOpacity>
+                  </Link>
                 </Header.Left>
                 <Header.Right>
                   <ToggleTheme />
@@ -170,7 +168,7 @@ const HomeScreen = () => {
         ItemSeparatorComponent={() => (
           <ListItemSeparator style={{ width: 10 }} />
         )}
-        extraData={filters} // This line is added to trigger re-renders on filters change
+        extraData={filters} //trigger re-renders on filters change
       />
       <MasonryFlashList
         data={combinedHits ?? []}
@@ -194,7 +192,6 @@ const HomeScreen = () => {
         onEndReachedThreshold={0.25}
         showsVerticalScrollIndicator={false}
         ref={masonryFlashListRef}
-        onScroll={handleScroll}
       />
     </ThemedView>
   );
