@@ -5,7 +5,7 @@ let SERVER_BASE_URL =
   (process.env?.EXPO_PUBLIC_SERVER_URL! as string) ??
   "https://pixabay.com/api/";
 const API_KEY = (process.env?.EXPO_PUBLIC_API_KEY! as string) ?? "45372168-dcb5d72298f85a485a1a06923";
-SERVER_BASE_URL = SERVER_BASE_URL + `?key=${API_KEY}&per_page=10&`;
+SERVER_BASE_URL = SERVER_BASE_URL + `?key=${API_KEY}&per_page=30&`;
 
 export class ImagesNetworkService {
   static async searchImages(params: any) {

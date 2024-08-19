@@ -78,6 +78,7 @@ const ImageDetailsScreen = () => {
         options={{
           title: `image details - ${id}`,
           animation: "slide_from_bottom",
+          animationDuration:100,
           headerShown: true,
           header: () => {
             return (
@@ -107,12 +108,17 @@ const ImageDetailsScreen = () => {
           },
         }}
       />
-      {isLoading ? <ActivityIndicator size="large" color="primary" /> : null}
+      {isLoading ?
+          <ActivityIndicator size="large" color="primary" />
+        : null}
       <ImageBackground
         source={{ uri: data?.hits?.[0]?.largeImageURL as string }}
         style={{ flex: 1 }}
         contentFit="contain"
-        placeholder={blurhash}
+        placeholder={data?.hits?.[0]?.previewURL ?? blurhash}
+        transition={0}
+        placeholderContentFit="contain" //image flashing issue on fast scroll
+        recyclingKey={data?.hits?.[0]?.id?.toString()} //image flashing issue on fast scroll
       />
     </View>
   );

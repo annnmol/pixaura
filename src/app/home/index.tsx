@@ -5,12 +5,10 @@ import {
 } from "@shopify/flash-list";
 import { useInfiniteQuery } from "@tanstack/react-query";
 import { Link, Stack } from "expo-router";
-import React, { useCallback, useRef } from "react";
+import React, { useRef } from "react";
 import {
-  NativeScrollEvent,
-  NativeSyntheticEvent,
   StyleSheet,
-  TouchableOpacity,
+  TouchableOpacity
 } from "react-native";
 import { useShallow } from "zustand/react/shallow";
 
@@ -75,10 +73,6 @@ const HomeScreen = () => {
   data?.pages?.forEach((page: any) => {
     combinedHits.push(...page?.hits); // Combine all the hits from all the pages
   });
-
-  function handleFilterPress() {
-    // restartApp();
-  }
 
   function onHeaderLogoPress() {
     // masonryFlashListRef?.current?.scrollToOffset({ offset: 0, animated: true });
@@ -189,7 +183,7 @@ const HomeScreen = () => {
         onRefresh={refetch}
         refreshing={isRefetching}
         onEndReached={fetchNextPage}
-        onEndReachedThreshold={0.25}
+        onEndReachedThreshold={0.4}
         showsVerticalScrollIndicator={false}
         ref={masonryFlashListRef}
       />

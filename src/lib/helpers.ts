@@ -1,9 +1,8 @@
 import {
   Dimensions,
-  NativeModules,
   Platform,
   StatusBar,
-  StyleSheet,
+  StyleSheet
 } from "react-native";
 
 const { width: deviceWidth, height: deviceHeight } = Dimensions.get("window");
@@ -34,9 +33,6 @@ export function heightPercentage(p: number): number {
   return (deviceHeight * p) / 100;
 }
 
-export function restartApp() {
-  return NativeModules?.DevSettings?.reload();
-}
 
 export function debounce<T extends (...args: any[]) => any>(
   func: T,

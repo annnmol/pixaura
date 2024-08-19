@@ -25,8 +25,10 @@ function HomeFeedCard({ item, index }: { item: PixImageType; index: number }) {
         source={{ uri: item?.webformatURL }}
         style={[styles.listImage, { height: imageHeight }]}
         contentFit="cover"
-        placeholder={blurhash}
-        transition={100}
+        transition={0}
+        placeholder={item?.previewURL ?? blurhash} //image flashing issue on fast scroll
+        placeholderContentFit="cover" //image flashing issue on fast scroll
+        recyclingKey={item?.id?.toString()} //image flashing issue on fast scroll
       />
     </TouchableOpacity>
   );

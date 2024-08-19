@@ -10,7 +10,7 @@ import {
 
 //custom imports
 import { theme } from "@/src/lib/colors";
-import { restartApp } from "@/src/lib/helpers";
+import { reloadAppAsync } from "expo";
 
 export function ToggleTheme() {
   const currentColorScheme = useColorScheme() ?? "light";
@@ -18,7 +18,7 @@ export function ToggleTheme() {
   useEffect(() => {
     // Set up the AppearanceListener
     const subscription = Appearance.addChangeListener(() => {
-      restartApp();
+      reloadAppAsync();
     });
 
     // Cleanup function to remove the listener
@@ -33,7 +33,7 @@ export function ToggleTheme() {
       "Please change the system theme via the device settings or the notification bar to switch themes. And then restart the app.",
       [
         { text: "Cancel", onPress: () => console.log("Cancel Pressed") },
-        { text: "Restart", onPress: () => restartApp() },
+        { text: "Restart", onPress: () => reloadAppAsync() },
       ]
     );
   }
