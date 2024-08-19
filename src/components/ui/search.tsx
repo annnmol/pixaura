@@ -7,7 +7,18 @@ import {
   useImperativeHandle,
   useRef,
 } from "react";
-import { StyleSheet, TextInput, TouchableOpacity, View, ViewProps, ViewStyle } from "react-native";
+import {
+  Keyboard,
+  KeyboardAvoidingView,
+  Platform,
+  StyleSheet,
+  TextInput,
+  TouchableOpacity,
+  View,
+  ViewProps,
+  ViewStyle,
+  TouchableWithoutFeedback,
+} from "react-native";
 
 //custom imports
 import { useThemeColor } from "@/src/hooks/useThemeColor";
@@ -83,30 +94,44 @@ function Search(props: SearchProps, ref: ForwardedRef<SearchComponentRef>) {
     };
   }, [debouncedQuery]);
 
+  useEffect(() => {
+    if (!queryRef.current) return;
+    queryRef.current.setNativeProps({
+      text: props?.inputProps?.defaultValue,
+      value: props?.inputProps?.defaultValue,
+    });
+  }, [props?.inputProps?.defaultValue]);
+
   return (
-    <View style={[styles.searchBarContainer,props.viewStyles]}>
-      <View style={styles.searchIcon}>
-        <Ionicons name="search" size={24} color={"grey"} />
-      </View>
-      <TextInput
-        keyboardType="web-search"
-        enterKeyHint="search"
-        clearButtonMode="always"
-        placeholder="Search for images"
-        ref={queryRef}
-        onChangeText={onChangeText}
-        style={[styles.input, { color: color }]}
-        placeholderTextColor={"grey"}
-        {...props?.inputProps}
-      />
-      <TouchableOpacity
-        style={styles.closeIcon}
-        onPress={clearSearch}
-        ref={closeBtnRef}
-      >
-        <Ionicons name="close" size={24} color={"grey"} />
-      </TouchableOpacity>
-    </View>
+    <KeyboardAvoidingView
+      behavior={Platform.OS === "ios" ? "padding" : "height"}
+    >
+      <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+        <View style={[styles.searchBarContainer, props.viewStyles]}>
+          <View style={styles.searchIcon}>
+            <Ionicons name="search" size={24} color={"grey"} />
+          </View>
+          <TextInput
+            keyboardType="web-search"
+            enterKeyHint="search"
+            clearButtonMode="always"
+            placeholder="Search for images"
+            ref={queryRef}
+            onChangeText={onChangeText}
+            style={[styles.input, { color: color }]}
+            placeholderTextColor={"grey"}
+            {...props?.inputProps}
+          />
+          <TouchableOpacity
+            style={styles.closeIcon}
+            onPress={clearSearch}
+            ref={closeBtnRef}
+          >
+            <Ionicons name="close" size={24} color={"grey"} />
+          </TouchableOpacity>
+        </View>
+      </TouchableWithoutFeedback>
+    </KeyboardAvoidingView>
   );
 }
 

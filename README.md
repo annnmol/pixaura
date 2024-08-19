@@ -12,11 +12,14 @@ eas login
 #### COMMAND - PREBUILD
 npx expo prebuild -p android
 
-#### COMMAND - BUILD
-npx expo run:android --variant release
+#### COMMAND - Local EAS Build
+eas build --profile development --platform android
 
 #### COMMAND - BUILD
 eas build --profile development --platform android
+
+#### COMMAND - BUILD using Java
+npx expo run:android --variant release
 
 ### DEPENDENCIES
 npx create-expo-app@latest

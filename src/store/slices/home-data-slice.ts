@@ -6,9 +6,9 @@ export interface IFilters {
   image_type: string;
   category: string;
   colors: string;
-  editors_choice: "true" | "false";
-  safesearch: "true" | "false";
-  order: string;
+  editors_choice: ""| "true" | "false";
+  safesearch: "" | "true" | "false";
+  order: "" | "popular" | "latest";
 }
 
 export const defaultFilters: IFilters = {

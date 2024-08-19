@@ -38,7 +38,7 @@ const HomeScreen = () => {
   const CategoryflashListRef = useRef<FlashList<any>>(null);
   const masonryFlashListRef = useRef<MasonryFlashListRef<any>>(null);
 
- 
+  
 
   //data fetching
   const {
@@ -131,13 +131,6 @@ const HomeScreen = () => {
                 <Header.Right>
                   <ToggleTheme />
                   <HomeFilters />
-                  {/* <TouchableOpacity onPress={handleFilterPress}>
-                    <MaterialCommunityIcons
-                      name="filter-variant"
-                      size={24}
-                      color={theme.onPrimary}
-                    />
-                  </TouchableOpacity> */}
                 </Header.Right>
               </Header>
             );
@@ -149,6 +142,9 @@ const HomeScreen = () => {
         onSearch={onSearch}
         ref={searchComponentRef}
         viewStyles={{ marginHorizontal: 16, marginTop: 8 }}
+        inputProps={{
+          defaultValue: filters?.q,
+        }}
       />
       <FlashList
         ref={CategoryflashListRef}
@@ -195,7 +191,7 @@ const HomeScreen = () => {
         onRefresh={refetch}
         refreshing={isRefetching}
         onEndReached={fetchNextPage}
-        onEndReachedThreshold={0.5}
+        onEndReachedThreshold={0.25}
         showsVerticalScrollIndicator={false}
         ref={masonryFlashListRef}
         onScroll={handleScroll}

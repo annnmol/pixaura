@@ -1,26 +1,61 @@
-import { useThemeColor } from "@/src/hooks/useThemeColor";
-import { theme } from "@/src/lib/colors";
-import { showHaptics } from "@/src/lib/haptics";
-import { useAppStore } from "@/src/store";
-import { IFilters, defaultFilters } from "@/src/store/slices/home-data-slice";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import {
   BottomSheetFlatList,
   BottomSheetFooter,
   BottomSheetModal,
-  BottomSheetScrollView,
   BottomSheetView,
   TouchableOpacity,
 } from "@gorhom/bottom-sheet";
 import { useCallback, useMemo, useRef, useState } from "react";
-import { FlatList, StyleSheet } from "react-native";
+import { Keyboard, StyleSheet } from "react-native";
 import { useShallow } from "zustand/react/shallow";
+
+//custom imports
+import { useThemeColor } from "@/src/hooks/useThemeColor";
+import { theme } from "@/src/lib/colors";
+import { showHaptics } from "@/src/lib/haptics";
+import { ImageColors, ImageOrders, ImageTypes } from "@/src/lib/image-helpers";
+import { useAppStore } from "@/src/store";
+import { IFilters, defaultFilters } from "@/src/store/slices/home-data-slice";
 import { ThemedButton, ThemedText } from "../themed";
 import { textStyles } from "../themed/text";
-import { renderBackdrop, renderFooter } from "../ui/bottom-sheet";
-import { ImageColors, ImageOrders, ImageTypes } from "@/src/lib/image-helpers";
+import { renderBackdrop } from "../ui/bottom-sheet";
 
 interface Props {}
+
+interface SectionListData {
+  title: string;
+  keyName: keyof IFilters;
+  data: string[];
+}
+
+const FiltersSectionListData: SectionListData[] = [
+  {
+    title: "Type",
+    keyName: "image_type",
+    data: ImageTypes,
+  },
+  {
+    title: "Color",
+    keyName: "colors",
+    data: ImageColors,
+  },
+  {
+    title: "Editors Choice",
+    keyName: "editors_choice",
+    data: ["true", "false"],
+  },
+  {
+    title: "Sort",
+    keyName: "order",
+    data: ImageOrders,
+  },
+  {
+    title: "Safe search",
+    keyName: "safesearch",
+    data: ["true", "false"],
+  },
+];
 
 const HomeFilters = ({}: Props) => {
   const backgroundColor = useThemeColor({}, "background");
@@ -37,14 +72,16 @@ const HomeFilters = ({}: Props) => {
       return temp;
     });
   }
-    
+
   function onApplyBtn() {
     setFilters(tempFilters);
+    showHaptics("impactAsync");
     handleDismissModalPress();
   }
   function onResetBtn() {
     setFilters(defaultFilters);
     setTempFilters(defaultFilters);
+    showHaptics("impactAsync");
     handleDismissModalPress();
   }
 
@@ -52,23 +89,22 @@ const HomeFilters = ({}: Props) => {
   const bottomSheetModalRef = useRef<BottomSheetModal>(null);
 
   // variables
-  const snapPoints = useMemo(() => ["25%", "50%", "75%"], []);
+  const snapPoints = useMemo(() => ["25%", "50%", "75%", "85"], []);
 
   // callbacks
   const handlePresentModalPress = useCallback(() => {
     bottomSheetModalRef.current?.present();
     showHaptics("impactAsync");
-  }, []);
+    setTempFilters(filters);
+    Keyboard.dismiss();
+  }, [filters]);
 
   // callbacks
   const handleDismissModalPress = useCallback(() => {
     bottomSheetModalRef.current?.dismiss();
     showHaptics("impactAsync");
-  }, []);
-
-//   const handleSheetChanges = useCallback((index: number) => {
-//     console.log("handleSheetChanges", index);
-//   }, []);
+    setTempFilters(filters);
+  }, [filters]);
 
   return (
     <>
@@ -83,7 +119,6 @@ const HomeFilters = ({}: Props) => {
         ref={bottomSheetModalRef}
         index={2}
         snapPoints={snapPoints}
-        // onChange={handleSheetChanges}
         backdropComponent={renderBackdrop}
         footerComponent={(props) => {
           return (
@@ -116,40 +151,18 @@ const HomeFilters = ({}: Props) => {
           >
             Choose filters 🎉
           </ThemedText>
-          <RenderSection
-            title="Type"
-            keyName="image_type"
-            data={ImageTypes}
-            onPress={onPress}
-            activeValue={tempFilters["image_type"]}
-          />
-          <RenderSection
-            title="Color"
-            keyName="colors"
-            data={ImageColors}
-            onPress={onPress}
-            activeValue={tempFilters["colors"]}
-          />
-          <RenderSection
-            title="Editors Choice"
-            keyName="editors_choice"
-            data={["true", "false"]}
-            onPress={onPress}
-            activeValue={tempFilters["editors_choice"]}
-          />
-          <RenderSection
-            title="Sort"
-            keyName="order"
-            data={ImageOrders}
-            onPress={onPress}
-            activeValue={tempFilters["order"]}
-          />
-          <RenderSection
-            title="Safe search"
-            keyName="safesearch"
-            data={["true", "false"]}
-            onPress={onPress}
-            activeValue={tempFilters["safesearch"]}
+          <BottomSheetFlatList
+            data={FiltersSectionListData}
+            keyExtractor={(item) => item.title}
+            renderItem={({ item }) => (
+              <RenderSection
+                title={item.title}
+                keyName={item.keyName}
+                data={item.data}
+                onPress={onPress}
+                activeValue={tempFilters[item.keyName]}
+              />
+            )}
           />
         </BottomSheetView>
       </BottomSheetModal>

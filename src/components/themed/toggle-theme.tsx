@@ -1,11 +1,11 @@
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 import React, { useEffect } from "react";
 import {
-    Alert,
-    Appearance,
-    StyleSheet,
-    View,
-    useColorScheme,
+  Alert,
+  Appearance,
+  StyleSheet,
+  View,
+  useColorScheme,
 } from "react-native";
 
 //custom imports
@@ -30,8 +30,11 @@ export function ToggleTheme() {
   function handlePress() {
     Alert.alert(
       "Change Theme",
-      "Please change the system theme via the device settings or the notification bar to switch themes.",
-      [{ text: "OK", onPress: () => console.log("OK Pressed") }]
+      "Please change the system theme via the device settings or the notification bar to switch themes. And then restart the app.",
+      [
+        { text: "Cancel", onPress: () => console.log("Cancel Pressed") },
+        { text: "Restart", onPress: () => restartApp() },
+      ]
     );
   }
 
