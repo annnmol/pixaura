@@ -5,7 +5,11 @@
   "build": {
     "development": {
       "developmentClient": true,
-      "distribution": "internal"
+      "distribution": "internal",
+       "env": {
+        "EXPO_PUBLIC_SERVER_URL": "https://pixabay.com/api/",
+        "EXPO_PUBLIC_API_KEY": "45372168-dcb5d72298f85a485a1a06923"
+      }
     },
     "preview": {
       "distribution": "internal",
