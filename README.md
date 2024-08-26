@@ -3,11 +3,13 @@
 ## Demo
 
  **Video:** [Watch here](https://github.com/annnmol/pixaura/blob/dev/demo.mp4)
- <video src='<video controls src="https://github.com/annnmol/pixaura/blob/dev/demo.mp4" title="your URL here"></video>' width=180/>
+ **Video:** [Watch here](https://raw.githubusercontent.com/annnmol/pixaura/dev/demo.mp4)
+ <video src="https://github.com/annnmol/pixaura/blob/dev/demo.mp4" width=180> </video>
 
 ## Install
 
 **APK:** [Download here](https://github.com/annnmol/pixaura/blob/dev/com.annnmol.pixaura.apk)
+**APK:** [Download here](https://raw.githubusercontent.com/annnmol/pixaura/dev/com.annnmol.pixaura.apk)
 
 ## Get started
 
