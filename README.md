@@ -3,6 +3,7 @@
 ## Demo
 
  **Video:** [Watch here](https://github.com/annnmol/pixaura/blob/dev/demo.mp4)
+ <video src='<video controls src="https://github.com/annnmol/pixaura/blob/dev/demo.mp4" title="your URL here"></video>' width=180/>
 
 ## Install
 
