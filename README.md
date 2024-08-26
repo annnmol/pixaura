@@ -1,9 +1,20 @@
 # Welcome to your Pixaura app 👋
 
+## Demo
+
+
+
+## Install
+
+
+
 ## Get started
 
 #### COMMAND - START
 yarn start --clear
+yarn start --clear --no-dev --minify  // Production
+
+npx expo run:android --variant preview
 
 #### COMMAND - EXPO EAS BUILD
 npm install --global eas-cli
@@ -13,9 +24,9 @@ eas login
 npx expo prebuild -p android
 
 #### COMMAND - Local EAS Build
-eas build --profile development --platform android
+eas build --local --profile development --platform android
 
-#### COMMAND - BUILD
+#### COMMAND - BUILD 
 eas build --profile development --platform android
 
 #### COMMAND - BUILD using Java
@@ -32,6 +43,8 @@ npx expo install expo-dev-client
 npx expo install expo-image
 
 npx expo install expo-haptics
+
+npx expo install expo-file-system
 
 npx expo install expo-linear-gradient
 
@@ -50,3 +63,5 @@ npx expo install @gorhom/bottom-sheet@^4
 npx expo install zustand
 
 npx expo install react-native-toast-message
+
+npx expo install @expo/vector-icons
