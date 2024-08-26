@@ -2,13 +2,12 @@
 
 ## Demo
 
- **Video:** [Watch here](https://github.com/annnmol/pixaura/blob/dev/demo.mp4)
+https://github.com/user-attachments/assets/1698b806-8b94-406b-a2cf-61cbdcf07a69
+
  **Video:** [Watch here](https://raw.githubusercontent.com/annnmol/pixaura/dev/demo.mp4)
- <video src="https://github.com/annnmol/pixaura/blob/dev/demo.mp4" width=180> </video>
 
 ## Install
 
-**APK:** [Download here](https://github.com/annnmol/pixaura/blob/dev/com.annnmol.pixaura.apk)
 **APK:** [Download here](https://raw.githubusercontent.com/annnmol/pixaura/dev/com.annnmol.pixaura.apk)
 
 ## Get started
