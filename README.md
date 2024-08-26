@@ -2,9 +2,11 @@
 
 ## Demo
 
-https://github.com/user-attachments/assets/1698b806-8b94-406b-a2cf-61cbdcf07a69
 
- **Video:** [Watch here](https://raw.githubusercontent.com/annnmol/pixaura/dev/demo.mp4)
+https://github.com/user-attachments/assets/9c4d3064-795d-48e8-a1bf-f28f1866f826
+
+
+ **Video:** [Watch here](https://github.com/user-attachments/assets/9c4d3064-795d-48e8-a1bf-f28f1866f826)
 
 ## Install
 
